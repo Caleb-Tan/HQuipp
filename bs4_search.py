@@ -30,4 +30,3 @@ def question(query):
         first_result.b.replace_with(placeholder_tag)
 
     return first_result.text
-
