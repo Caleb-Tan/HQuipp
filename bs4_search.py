@@ -8,7 +8,7 @@ from timeit import default_timer as timer
 url = 'https://google.com/search?q='
 
 def question(query):
-    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+    headers = {'User-Agent': 'Chrome/67.0.3396.99'}
     response = requests.get(url + query, headers=headers)
     # with open('output2.html', 'wb') as f:
     #    f.write(response.content)
@@ -28,5 +28,6 @@ def question(query):
         placeholder_tag = soup.new_tag("p")
         placeholder_tag.string = "**" + bold_text + "**"
         first_result.b.replace_with(placeholder_tag)
-
+    
     return first_result.text
+
