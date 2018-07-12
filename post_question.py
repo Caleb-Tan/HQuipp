@@ -59,14 +59,16 @@ async def on_message(message):
 
 async def post_embed(data):
     print(data)
-    url = "https://www.google.com/search?q=" + data["question_str"].replace(" ", "+")
+    query = data["question_str"].replace(" ", "+")
+    url = "https://www.google.com/search?q=" + query
     choices[0] = data["answers"][0]
     choices[1] = data["answers"][1]
     choices[2] = data["answers"][2]
     description = ""
-    for i in range(0,3):
-        ans = data["answers"][i]
-        description += ans + "\n" 
+    for i in range(1,4):
+        ans = data["answers"][i-1]
+        ans_url = url + "+AND+" + ans.replace(" ", "+")
+        description += str(i) + ". " + "[" + ans + "]" + "(" + ans_url + ")" + "\n" 
     new_embed = discord.Embed(title=data["question_str"], url=url, description=description, color=0xff2600)
     new_embed.add_field(name="Question", value=str(data["question_number"]) + " out of " + str(data["question_count"]))
     for server in client.servers:
@@ -97,7 +99,7 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-    # await post_embed({"answers": ["Isle of Wight", "Isle of Islay", "Isle of Arran"], "question_str": "Of these three British islands, which is the largest in terms of land area?", "question_number": 8, "question_count": 12})
+    await post_embed({"answers": ["Isle of Wight", "Isle of Islay", "Isle of Arran"], "question_str": "Of these three British islands, which is the largest in terms of land area?", "question_number": 8, "question_count": 12})
 
 client.loop.create_task(background_log_loop())
 client.run(TOKEN)
