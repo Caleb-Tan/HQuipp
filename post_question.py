@@ -22,7 +22,6 @@ def generate_embed(choice, command, choiceNo):
 
 @client.event
 async def on_message(message):
-    print(message.content)
     if message.author == client.user:
         return
         
@@ -44,10 +43,19 @@ async def on_message(message):
                     await client.send_message(message.channel, embed=data["embed" + str(i)])
             else:
                 result = search.question(command)
+                print(result)
                 new_embed1 = discord.Embed(title=command, description=result, color=0x00f900)
-                # new_embed2 = discord.Embed(title=result["result2"][0], url=result["result2"][1], description=result["result2"][2], color=0x00f900)
                 await client.send_message(message.channel, embed=new_embed1)
-                # await client.send_message(message.channel, embed=new_embed2)
+        if message.content.startswith(".math "):
+            command = message.content.strip(".math").lstrip().rstrip().replace("^", "**")
+            try:
+                math = round(eval(command),4)
+                await client.send_message(message.channel, "`" + str(math) + "`")
+            except (SyntaxError, NameError, TypeError):
+                await client.send_message(message.channel, "`Um something went wrong there, please try again.`")
+            except (ZeroDivisionError):
+                await client.send_message(message.channel, "`DIVISION BY ZERO IS NOT ALLOWED BRO`")
+
 
 async def post_embed(data):
     print(data)
