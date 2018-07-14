@@ -19,14 +19,14 @@ with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "conn_setting
     settings = [line for line in settings if line != "" and line != " "]
 
     try:
-        BEARER_TOKEN = settings[0].split("=")[1]
+        BEARER_TOKEN_US = settings[0].split("=")[1]
     except IndexError as e:
         logging.fatal(f"Settings read error: {settings}")
         raise e
 
 print("getting")
 main_url = f"https://api-quiz.hype.space/shows/now?type="
-headers = {"Authorization": f"Bearer {BEARER_TOKEN}",
+headers = {"Authorization": f"Bearer {BEARER_TOKEN_US}",
            "x-hq-client": "Android/1.3.0"}
 # "x-hq-stk": "MQ==",
 # "Connection": "Keep-Alive",
