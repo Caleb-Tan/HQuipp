@@ -2,32 +2,40 @@ import urllib
 from bs4 import BeautifulSoup
 import requests
 import webbrowser
-from timeit import default_timer as timer
+import time
 
 
 url = 'https://google.com/search?q='
+headers = {'User-Agent': 'Chrome/67.0.3396.99'}
+soup = ""
 
 def question(query):
-    headers = {'User-Agent': 'Chrome/67.0.3396.99'}
+    start = time.time()
+
     response = requests.get(url + query, headers=headers)
-    # with open('output2.html', 'wb') as f:
+    # with open('output1.html', 'wb') as f:
     #    f.write(response.content)
     # webbrowser.open('output2.html')
 
     soup = BeautifulSoup(response.text, 'lxml')
-    first_result = soup.find('div', class_='g')
+    results = soup.findAll('div', class_='g')
+    placeholder_tag = soup.new_tag("p")
     
-    if first_result.find("cite"):
-        placeholder_tag = soup.new_tag("p")
-        first_result.cite.replace_with(placeholder_tag)
-    while first_result.find("a"):
-        placeholder_tag = soup.new_tag("p")
-        first_result.a.replace_with(placeholder_tag)
-    while first_result.find("b"):
-        bold_text = first_result.b.text
-        placeholder_tag = soup.new_tag("p")
+    result = clean(results[0], placeholder_tag)
+
+    if not result:
+        result = clean(results[1], placeholder_tag)
+    end = round(time.time()-start, 3)
+    return {"result": result, "time": end}
+    
+def clean(html, placeholder_tag):
+    if html.find("cite"):
+        html.cite.replace_with(placeholder_tag)
+    while html.find("a"):
+        html.a.replace_with(placeholder_tag)
+    while html.find("b"):
+        bold_text = html.b.text
         placeholder_tag.string = "**" + bold_text + "**"
-        first_result.b.replace_with(placeholder_tag)
-    
-    return first_result.text
+        html.b.replace_with(placeholder_tag)
+    return html.text    
 

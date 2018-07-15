@@ -17,7 +17,9 @@ data = {}
 
 def generate_embed(choice, command, choiceNo):
     result = search.question(command.replace("/", choice))
-    data["embed" + str (choiceNo)] = discord.Embed(title=choice, description=result, color=0x00f900)
+    embed = discord.Embed(title=choice, description=result["result"], color=0x00f900)
+    embed.set_footer_text(text="Search Time: " + str(result["time"]))
+    data["embed" + str (choiceNo)] = embed
 
 
 @client.event
@@ -82,8 +84,9 @@ async def analyze_question(question):
     if "who" or "whom" in undercase_question:
         print("Person Question Detected")
     elif "which" in undercase_question:
-        location_keywords = ["farthest", "closest", "furthest"]
-        # if 
+        location_keywords = ["farthest", "closest", "furthest", "nearest"]
+        location_keywords2 = ["city", "cities", "country", "countries", "building", "place", "state", "island", "location", ""]
+        if 
         
 
 
