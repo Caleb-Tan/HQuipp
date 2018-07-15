@@ -17,8 +17,8 @@ data = {}
 
 def generate_embed(choice, command, choiceNo):
     result = search.question(command.replace("/", choice))
-    embed = discord.Embed(title=choice, description=result["result"], color=0x00f900)
-    embed.set_footer_text(text="Search Time: " + str(result["time"]))
+    new_embed = discord.Embed(title=choice, description=result["result"], color=0x00f900)
+    new_embed.set_footer(text="Search Time: " + str(result["time"]))
     data["embed" + str (choiceNo)] = embed
 
 
@@ -45,9 +45,9 @@ async def on_message(message):
                     await client.send_message(message.channel, embed=data["embed" + str(i)])
             else:
                 result = search.question(command)
-                print(result)
-                new_embed1 = discord.Embed(title=command, description=result, color=0x00f900)
-                await client.send_message(message.channel, embed=new_embed1)
+                new_embed = discord.Embed(title=command, description=result["result"], color=0x00f900)
+                new_embed.set_footer(text="Search Time: " + str(result["time"]))
+                await client.send_message(message.channel, embed=new_embed)
         if message.content.startswith(".math "):
             command = message.content.strip(".math").lstrip().rstrip().replace("^", "**")
             try:
@@ -102,6 +102,7 @@ async def background_log_loop():
         if not line:
             continue
         else:
+            print(line)
             if ("question_str" in line and line is not "\n"):
                 await post_embed(ast.literal_eval(line.strip("INFO:root"))[0])
 
