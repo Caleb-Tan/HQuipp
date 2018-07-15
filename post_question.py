@@ -19,7 +19,7 @@ def generate_embed(choice, command, choiceNo):
     result = search.question(command.replace("/", choice))
     new_embed = discord.Embed(title=choice, description=result["result"], color=0x00f900)
     new_embed.set_footer(text="Search Time: " + str(result["time"]))
-    data["embed" + str (choiceNo)] = embed
+    data["embed" + str (choiceNo)] = new_embed
 
 
 @client.event
