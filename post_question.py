@@ -86,7 +86,7 @@ async def analyze_question(question):
     elif "which" in undercase_question:
         location_keywords = ["farthest", "closest", "furthest", "nearest"]
         location_keywords2 = ["city", "cities", "country", "countries", "building", "place", "state", "island", "location", ""]
-        if 
+        # if 
         
 
 
