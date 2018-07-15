@@ -1,1 +1,6 @@
 [{'answers': ['Kitten noses', 'Turtle tails', 'Rabbit ears'], 'question_str': 'Which of these animal body parts is also a name for old TV antennas?', 'question_number': 2, 'question_count': 12}]
+[{'answers': ['Shellfish', 'Milk', 'Wheat'], 'question_str': 'People with gluten allergies should specifically avoid consuming what?', 'question_number': 3, 'question_count': 12}]
+WARNING:lomond:disconnecting websocket
+[{'answers': ['Bing', 'Twitter', 'Facebook'], 'question_str': 'Which of these websites is NOT best described as a social network?', 'question_number': 4, 'question_count': 12}]
+WARNING:lomond:disconnecting websocket
+[{'answers': ['The Big Chill', 'Big', 'The Big Lebowski'], 'question_str': 'Which of these "big" movies was nominated for the most Academy Awards?', 'question_number': 5, 'question_count': 12}]
