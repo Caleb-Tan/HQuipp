@@ -1,2 +1,1 @@
-INFO:root:[{'answers': ['Joan of Arc', 'Robin Hood', 'Merlin'], 'question_str': "Who is an unlikely villain in one of Shakespeare's plays?", 'question_number': 10, 'question_count': 12}]
-INFO:root:[{'answers': ['Egypt', 'Sudan', 'Algeria'], 'question_str': "By area, which of these countries is the largest?", 'question_number': 10, 'question_count': 12}]
+[{'answers': ['Kitten noses', 'Turtle tails', 'Rabbit ears'], 'question_str': 'Which of these animal body parts is also a name for old TV antennas?', 'question_number': 2, 'question_count': 12}]

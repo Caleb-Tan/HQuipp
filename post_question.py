@@ -77,6 +77,18 @@ async def post_embed(data):
                     if channel.id == "456627296317734922":
                         await client.send_message(channel, embed=new_embed)
 
+async def analyze_question(question):
+    undercase_question = question.lower()
+    if "who" or "whom" in undercase_question:
+        print("Person Question Detected")
+    elif "which" in undercase_question:
+        location_keywords = ["farthest", "closest", "furthest"]
+        # if 
+        
+
+
+    
+
 async def background_log_loop():
     await client.wait_until_ready()
     file = open("data.log", "r")
@@ -99,7 +111,7 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-    await post_embed({"answers": ["Isle of Wight", "Isle of Islay", "Isle of Arran"], "question_str": "Of these three British islands, which is the largest in terms of land area?", "question_number": 8, "question_count": 12})
+    await analyze_question("Who is an unlikely villain in one of Shakespeare's plays?")
 
 client.loop.create_task(background_log_loop())
 client.run(TOKEN)
