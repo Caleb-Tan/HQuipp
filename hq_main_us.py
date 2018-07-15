@@ -35,7 +35,7 @@ headers = {"Authorization": f"Bearer {BEARER_TOKEN_US}",
 while True:
     print()
     try:
-        response_data = asyncio.get_event_loop().run_until_complete(   networking.get_json_response(main_url, timeout=1.5, headers=headers))
+        response_data = asyncio.get_event_loop().run_until_complete(networking.get_json_response(main_url, timeout=1.5, headers=headers))
     except:
         print("Server response not JSON, retrying...")
         time.sleep(1)
@@ -52,7 +52,7 @@ while True:
             offset = datetime.fromtimestamp(now) - datetime.utcfromtimestamp(now)
             print(f"Next show time: {(next_time + offset).strftime('%Y-%m-%d %I:%M %p')}")
             print("Prize: " + response_data["nextShowPrize"])
-            logging.info([{'answers': ['Kitten noses', 'Turtle tails', 'Rabbit ears'], 'question_str': 'Which of these animal body parts is also a name for old TV antennas?', 'question_number': 2, 'question_count': 12}])
+            # logging.info([{'answers': ['Kitten noses', 'Turtle tails', 'Rabbit ears'], 'question_str': 'Which of these animal body parts is also a name for old TV antennas?', 'question_number': 2, 'question_count': 12}])
             time.sleep(6)
     else:
         socket = response_data["broadcast"]["socketUrl"].replace("https", "wss")
