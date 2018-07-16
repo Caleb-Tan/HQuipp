@@ -7,7 +7,6 @@ import time
 import asyncio
 from time import sleep
 from nltk import pos_tag, word_tokenize
-import question as q
 
 
 TOKEN = 'NDYwNTkyOTE0MzM5MjAxMDI0.DhHAGA.sem1-DZGmZ5chdamGdd-TE6xQVM'
