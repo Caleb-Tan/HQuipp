@@ -6,6 +6,8 @@ from threading import Thread
 import time
 import asyncio
 from time import sleep
+from nltk import pos_tag, word_tokenize
+import question as q
 
 
 TOKEN = 'NDYwNTkyOTE0MzM5MjAxMDI0.DhHAGA.sem1-DZGmZ5chdamGdd-TE6xQVM'
@@ -79,18 +81,6 @@ async def post_embed(data):
                     if channel.id == "456627296317734922":
                         await client.send_message(channel, embed=new_embed)
 
-async def analyze_question(question):
-    undercase_question = question.lower()
-    if "who" or "whom" in undercase_question:
-        print("Person Question Detected")
-    elif "which" in undercase_question:
-        location_keywords = ["farthest", "closest", "furthest", "nearest"]
-        location_keywords2 = ["city", "cities", "country", "countries", "building", "place", "state", "island", "location", ""]
-        # if 
-        
-
-
-    
 
 async def background_log_loop():
     await client.wait_until_ready()
@@ -102,8 +92,8 @@ async def background_log_loop():
         if not line:
             continue
         else:
-            print(line)
-            if ("question_str" in line and line is not "\n"):
+            if ("question_str" in line and line != "\n"):
+                print(line)
                 await post_embed(ast.literal_eval(line.strip("INFO:root"))[0])
 
 
@@ -115,7 +105,6 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-    await analyze_question("Who is an unlikely villain in one of Shakespeare's plays?")
 
 client.loop.create_task(background_log_loop())
 client.run(TOKEN)
