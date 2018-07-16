@@ -8,9 +8,6 @@ from colorama import Fore, Style
 from lomond import WebSocket
 from unidecode import unidecode
 
-import question
-
-
 async def fetch(url, session, timeout):
     try:
         async with session.get(url, timeout=timeout) as response:
