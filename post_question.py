@@ -26,7 +26,6 @@ def generate_embed(choice, command, choiceNo):
 async def on_message(message):
     if message.author == client.user:
         return
-        
     if len (message.embeds) == 0:
         if message.content.startswith(".q "):
             command = message.content.strip(".q ")
@@ -74,11 +73,7 @@ async def post_embed(data):
         description += str(i) + ". " + "[" + ans + "]" + "(" + ans_url + ")" + "\n" 
     new_embed = discord.Embed(title=data["question_str"], url=url, description=description, color=0xff2600)
     new_embed.add_field(name="Question", value=str(data["question_number"]) + " out of " + str(data["question_count"]))
-    for server in client.servers:
-        if server.id == "456623395858022413":
-            for channel in server.channels:
-                if channel.id == "468613455872524288":
-                    await client.send_message(channel, embed=new_embed)
+    await client.send_message(client.get_channel("468613455872524288"), embed=new_embed)
 
 
 async def background_log_loop():

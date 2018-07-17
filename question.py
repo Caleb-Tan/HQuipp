@@ -70,4 +70,4 @@ def extract_info_multi_selection(word_types, q_words):
 
 
 
-analyze_question("""Out of the following British places, which one records the lowest average annual rainfall?""", ["Menorca", "Ibiza", "La Palma"])
+analyze_question("""Which Texas city is farthest north?""", ["Menorca", "Ibiza", "La Palma"])
