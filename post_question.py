@@ -73,7 +73,7 @@ async def post_embed(data):
         description += str(i) + ". " + "[" + ans + "]" + "(" + ans_url + ")" + "\n" 
     new_embed = discord.Embed(title=data["question_str"], url=url, description=description, color=0xff2600)
     new_embed.add_field(name="Question", value=str(data["question_number"]) + " out of " + str(data["question_count"]))
-    await client.send_message(client.get_channel("468613455872524288"), embed=new_embed)
+    await client.send_message(client.get_channel("468874613498314752"), embed=new_embed)
 
 
 async def background_log_loop():
