@@ -44,6 +44,7 @@ async def on_message(message):
                 for i in range(1,4):
                     await client.send_message(message.channel, embed=data["embed" + str(i)])
             else:
+                print(message.channel.id)
                 result = search.question(command)
                 new_embed = discord.Embed(title=command, description=result["result"], color=0x00f900)
                 new_embed.set_footer(text="Search Time: " + str(result["time"]))
@@ -76,8 +77,8 @@ async def post_embed(data):
     for server in client.servers:
         if server.id == "456623395858022413":
             for channel in server.channels:
-                    if channel.id == "456627296317734922":
-                        await client.send_message(channel, embed=new_embed)
+                if channel.id == "468613455872524288":
+                    await client.send_message(channel, embed=new_embed)
 
 
 async def background_log_loop():

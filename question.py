@@ -17,7 +17,7 @@ def analyze_question(question, choices):
     if any(q_keyword in undercase_question for q_keyword in ["who", "whom", "whose"]): # person question
         print("Person Question Detected")
     elif "which" in undercase_question: # multiple selection question
-        extract_info_multi_selection(word_types, q_words)
+        print(extract_info_multi_selection(word_types, q_words))
         if "NOT" in q_words:
             pass
         else: 
@@ -64,10 +64,10 @@ def extract_info_multi_selection(word_types, q_words):
     if not subject:
         subject = "-"
     
-    return {"subject": subject, "condition": condition}
+    return {"subject": subject.rstrip(), "condition": condition.rstrip()}
 
 
 
 
 
-analyze_question("""Which of these creatures has the fewest hearts?""", ["Menorca", "Ibiza", "La Palma"])
+analyze_question("""Out of the following British places, which one records the lowest average annual rainfall?""", ["Menorca", "Ibiza", "La Palma"])
