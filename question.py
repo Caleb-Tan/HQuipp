@@ -3,12 +3,12 @@ import asyncio
 import time
 
 # special keywords
-location_keywords = ["farthest", "closest", "furthest", "nearest", "located"]
-location_keywords2 = ["city", "cities", "country", "countries", "territory", "territories", "building", "place", "state", "island", "mountain", "location", "area", "site", "region", "province", "district", "zone", "sector", "north", "south", "east", "west"]
+location_keywords = ["farthest", "closest", "furthest", "nearest", "located", "is in"]
+location_keywords2 = ["city", "cities", "country", "countries", "territory", "territories", "building", "place", "state", "island", "mountain", "location", "area", "site", "region", "nation", "province", "district", "zone", "sector", "north", "south", "east", "west"]
 time_keywords = ["earliest", "most recently", "oldest", "youngest"]
-base_map_url = "https://maps.googleapis.com/maps/api/staticmap?center=krakow&zoom=1&scale=1&size=540x400&maptype=roadmap&format=png&visual_refresh=true&"
+base_map_url = "https://maps.googleapis.com/maps/api/staticmap?zoom=2&scale=2&size=700x500&maptype=roadmap&format=png&visual_refresh=true"
 
-def analyze_question(question, choices):
+async def analyze_question(question, choices):
     start_time = time.time()
     undercase_question = question.lower()
     q_words = undercase_question.split(" ")
@@ -19,10 +19,10 @@ def analyze_question(question, choices):
     if any(q_keyword in undercase_question for q_keyword in ["who", "whom", "whose"]): # person question
         print("Person Question Detected")
     elif "which" in undercase_question: # multiple selection question
-        q_data = extract_info_multi_selection(word_types, q_words)
-        print(q_data)
-        if any(keyword in undercase_question for keyword in location_keywords) and any(keyword in undercase_question for keyword in location_keywords2):
-            base_marker_url = "&markers=size:mid%7Ccolor:0xff0a00%7C"
+        q_data = await extract_info_multi_selection(word_types, q_words)
+        if any(keyword in undercase_question for keyword in location_keywords) and any(keyword in undercase_question for keyword in location_keywords2): # if a map is needed
+            print("Location Question Detected")
+            new_base_map_url = ""
             parameter = ""
             if q_data["subject"] != "-":
                 for tag in pos_tag(word_tokenize(q_data["subject"])):
@@ -31,16 +31,18 @@ def analyze_question(question, choices):
             global base_map_url
             for i in range(0,3):
                 choice = choices[i].replace(" ", "+")
-                base_map_url += base_marker_url + "label:" + str(i+1) + "%7C" + choice + parameter
-            print(base_map_url)
+                marker_link = "&markers=size:mid%7Ccolor:0xff0a00%7C" + "label:" + str(i+1) + "%7C" + choice + parameter
+                new_base_map_url += base_map_url + marker_link if i == 0 else marker_link
+            
+            return new_base_map_url
 
     
     print("--- %s seconds ---" % (time.time() - start_time))
 
 
 
-    
-def extract_info_multi_selection(word_types, q_words):
+ 
+async def extract_info_multi_selection(word_types, q_words):
     subject = ""
     condition = ""
 
@@ -79,8 +81,4 @@ def extract_info_multi_selection(word_types, q_words):
     
     return {"subject": subject.rstrip(), "condition": condition.rstrip()}
 
-
-
-
-
-analyze_question("""Which US military academy is located farthest to the east?""", ["US Naval Academy", "US Military Academy", "Air Force Academy"])
+# analyze_question("""Which of these places is farthest north?""", ["South Africa", "South Carolina", "South Dakota"])

@@ -3,14 +3,18 @@ import bs4_search as search
 import ast
 from string import digits
 from threading import Thread
+from discord.ext.commands import Bot
 import time
 import asyncio
-from time import sleep
+import time
+import question as q
 
 
 TOKEN = 'NDYwNTkyOTE0MzM5MjAxMDI0.DhHAGA.sem1-DZGmZ5chdamGdd-TE6xQVM'
+BOT_PREFIX = (".")
 
 client = discord.Client()
+client = Bot(command_prefix=BOT_PREFIX)
 
 choices = ["placeholder", "placeholder", "placeholder"]
 data = {}
@@ -22,41 +26,51 @@ def generate_embed(choice, command, choiceNo):
     data["embed" + str (choiceNo)] = new_embed
 
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
+@client.command(pass_context=True)
+async def q(ctx):
+    if ctx.message.author == client.user:
         return
-    if len (message.embeds) == 0:
-        if message.content.startswith(".q "):
-            command = message.content.strip(".q ")
-            if "/" in command:
-                global choices
-                t1 = Thread(target = generate_embed, args=(choices[0],command,1))
-                t2 = Thread(target = generate_embed, args=(choices[1],command,2))
-                t3 = Thread(target = generate_embed, args=(choices[2],command,3))
-                t1.start()
-                t2.start()
-                t3.start()
-                t1.join()
-                t2.join
-                t3.join()
-                for i in range(1,4):
-                    await client.send_message(message.channel, embed=data["embed" + str(i)])
-            else:
-                print(message.channel.id)
-                result = search.question(command)
-                new_embed = discord.Embed(title=command, description=result["result"], color=0x00f900)
-                new_embed.set_footer(text="Search Time: " + str(result["time"]))
-                await client.send_message(message.channel, embed=new_embed)
-        if message.content.startswith(".math "):
-            command = message.content.strip(".math").lstrip().rstrip().replace("^", "**")
-            try:
-                math = round(eval(command),4)
-                await client.send_message(message.channel, "`" + str(math) + "`")
-            except (SyntaxError, NameError, TypeError):
-                await client.send_message(message.channel, "`Um something went wrong there, please try again.`")
-            except (ZeroDivisionError):
-                await client.send_message(message.channel, "`DIVISION BY ZERO IS NOT ALLOWED BRO`")
+    command = ctx.message.content.strip(".q ")
+    if "/" in command:
+        global choices
+        t1 = Thread(target = generate_embed, args=(choices[0],command,1))
+        t2 = Thread(target = generate_embed, args=(choices[1],command,2))
+        t3 = Thread(target = generate_embed, args=(choices[2],command,3))
+        t1.start()
+        t2.start()
+        t3.start()
+        t1.join()
+        t2.join
+        t3.join()
+        for i in range(1,4):
+            await client.send_message(ctx.message.channel, embed=data["embed" + str(i)])
+    else:
+        result = search.question(command)
+        new_embed = discord.Embed(title=command, description=result["result"], color=0x00f900)
+        new_embed.set_footer(text="Search Time: " + str(result["time"]))
+        await client.send_message(ctx.message.channel, embed=new_embed)
+
+@client.command(pass_context=True)
+async def math(ctx):
+    command = ctx.message.content.strip(".math").lstrip().rstrip().replace("^", "**")
+    print(command)
+    try:
+        math = round(eval(command),4)
+        await client.send_message(ctx.message.channel, "`" + str(math) + "`")
+    except (SyntaxError, NameError, TypeError):
+        await client.send_message(ctx.message.channel, "`Um something went wrong there, please try again.`")
+    except (ZeroDivisionError):
+        await client.send_message(ctx.message.channel, "`DIVISION BY ZERO IS NOT ALLOWED BRO`")
+
+@client.command(pass_context=True)
+async def bping(ctx):
+    if "bping" in ctx.message.content:
+        channel = ctx.message.channel
+        t1 = time.perf_counter()
+        await client.send_typing(channel)
+        t2 = time.perf_counter()
+        embed = discord.Embed(title="Ben10 Ping Delay", description='Ping: {}'.format(round((t2-t1)*1000)) + "ms", color=0xEE82EE)
+        msg = await client.send_message(channel, embed=embed)
 
 
 async def post_embed(data):
@@ -74,7 +88,11 @@ async def post_embed(data):
     new_embed = discord.Embed(title=data["question_str"], url=url, description=description, color=0xff2600)
     new_embed.add_field(name="Question", value=str(data["question_number"]) + " out of " + str(data["question_count"]))
     await client.send_message(client.get_channel("468874613498314752"), embed=new_embed)
-
+    
+    # url = await q.analyze_question(data["question_str"], data["answers"])
+    # new_embed = discord.Embed(title="Location Question Detected", color=0x0000ff)
+    # new_embed.set_image(url=url)
+    # await client.send_message(client.get_channel("468874613498314752"), embed=new_embed)
 
 async def background_log_loop():
     await client.wait_until_ready()
@@ -86,8 +104,8 @@ async def background_log_loop():
         if not line:
             continue
         else:
+            print(line)
             if ("question_str" in line and line != "\n"):
-                print(line)
                 await post_embed(ast.literal_eval(line.strip("INFO:root"))[0])
 
 
