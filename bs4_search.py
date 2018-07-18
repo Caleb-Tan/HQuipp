@@ -20,7 +20,7 @@ def question(query):
     soup = BeautifulSoup(response.text, 'lxml')
     results = soup.findAll('div', class_='g')
     placeholder_tag = soup.new_tag("p")
-    
+
     result = clean(results[0], placeholder_tag)
 
     if not result:

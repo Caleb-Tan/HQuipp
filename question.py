@@ -22,14 +22,18 @@ def analyze_question(question, choices):
         q_data = extract_info_multi_selection(word_types, q_words)
         print(q_data)
         if any(keyword in undercase_question for keyword in location_keywords) and any(keyword in undercase_question for keyword in location_keywords2):
-            base_marker_url = "&markers=size:mid%7Ccolor:0xff593d%7C"
+            base_marker_url = "&markers=size:mid%7Ccolor:0xff0a00%7C"
+            parameter = ""
+            if q_data["subject"] != "-":
+                for tag in pos_tag(word_tokenize(q_data["subject"])):
+                    if tag[1] in ["JJ", "NNP"]:
+                            parameter += "+" + tag[0]
             global base_map_url
             for i in range(0,3):
-                choice = choices[i]
-                base_map_url += base_marker_url + "label:" + str(i+1) + "%7C" + choice
+                choice = choices[i].replace(" ", "+")
+                base_map_url += base_marker_url + "label:" + str(i+1) + "%7C" + choice + parameter
             print(base_map_url)
 
-                
     
     print("--- %s seconds ---" % (time.time() - start_time))
 
@@ -79,4 +83,4 @@ def extract_info_multi_selection(word_types, q_words):
 
 
 
-analyze_question("""Which of these capital cities is in South America?""", ["Menorca", "Ibiza", "La Palma"])
+analyze_question("""Which US military academy is located farthest to the east?""", ["US Naval Academy", "US Military Academy", "Air Force Academy"])
