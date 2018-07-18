@@ -52,7 +52,6 @@ while True:
             offset = datetime.fromtimestamp(now) - datetime.utcfromtimestamp(now)
             print(f"Next show time: {(next_time + offset).strftime('%Y-%m-%d %I:%M %p')}")
             print("Prize: " + response_data["nextShowPrize"])
-            logging.info([{'answers': ['Kitten noses', 'Turtle tails', 'Rabbit ears'], 'question_str': 'Which of these animal body parts is also a name for old TV antennas?', 'question_number': 2, 'question_count': 12}])
             time.sleep(6)
     else:
         socket = response_data["broadcast"]["socketUrl"].replace("https", "wss")
