@@ -5,8 +5,10 @@ import time
 from datetime import datetime
 import json
 import colorama
-
 import networking
+import sys
+
+sys.dont_write_bytecode = True
 
 # Set up color-coding
 colorama.init()
@@ -56,5 +58,5 @@ while True:
         data = asyncio.get_event_loop().run_until_complete(asyncio.gather(networking.websocket_handler(socket, headers)))
         print(data)
         with open('data.json', 'w') as outfile:
-            json.dump(data)
+            json.dumps(data)
         
