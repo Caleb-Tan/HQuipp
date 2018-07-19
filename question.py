@@ -82,9 +82,3 @@ async def extract_info_multi_selection(word_types, q_words):
     
     return {"subject": subject.rstrip(), "condition": condition.rstrip()}
 
-
-def nltk_check(question):
-    word_types = pos_tag(word_tokenize(question.replace('"', "").replace("'s", "").replace("following", "")))
-    print(word_types)
-
-nltk_check("""Which of these places is farthest north?""")
