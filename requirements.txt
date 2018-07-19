@@ -6,3 +6,5 @@ aiodns
 cchardet
 colorama
 lomond
+requests
+discord

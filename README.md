@@ -1,4 +1,4 @@
-# HackQ-Trivia
+# HQuipp
 Yet another HQ trivia bot, in Python. Automatically scrapes HQ Trivia questions without OCR and answers them.
 
 ## Getting Started
