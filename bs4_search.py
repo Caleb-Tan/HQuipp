@@ -3,7 +3,9 @@ from bs4 import BeautifulSoup
 import requests
 import webbrowser
 import time
+import sys
 
+sys.dont_write_bytecode = True
 
 url = 'https://google.com/search?q='
 headers = {'User-Agent': 'Chrome/67.0.3396.99'}

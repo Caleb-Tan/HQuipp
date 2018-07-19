@@ -7,6 +7,9 @@ import aiohttp
 from colorama import Fore, Style
 from lomond import WebSocket
 from unidecode import unidecode
+import sys
+
+sys.dont_write_bytecode = True
 
 async def fetch(url, session, timeout):
     try:

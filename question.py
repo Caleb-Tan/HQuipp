@@ -1,6 +1,9 @@
 from nltk import pos_tag, word_tokenize
 import asyncio
 import time
+import sys
+
+sys.dont_write_bytecode = True
 
 # special keywords
 location_keywords = ["farthest", "closest", "furthest", "nearest", "located", "is in"]

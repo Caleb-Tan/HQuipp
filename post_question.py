@@ -7,8 +7,10 @@ from discord.ext.commands import Bot
 import time
 import asyncio
 import time
-import question as q
+import question as qs
+import sys
 
+sys.dont_write_bytecode = True
 
 TOKEN = 'NDYwNTkyOTE0MzM5MjAxMDI0.DhHAGA.sem1-DZGmZ5chdamGdd-TE6xQVM'
 BOT_PREFIX = (".")
@@ -89,7 +91,7 @@ async def post_embed(data):
     new_embed.add_field(name="Question", value=str(data["question_number"]) + " out of " + str(data["question_count"]))
     await client.send_message(client.get_channel("468874613498314752"), embed=new_embed)
     
-    # url = await q.analyze_question(data["question_str"], data["answers"])
+    # data = await qs.analyze_question(data["question_str"], data["answers"])
     # new_embed = discord.Embed(title="Location Question Detected", color=0x0000ff)
     # new_embed.set_image(url=url)
     # await client.send_message(client.get_channel("468874613498314752"), embed=new_embed)
