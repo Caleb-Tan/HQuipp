@@ -1,0 +1,27 @@
+WARNING:lomond:disconnecting websocket
+INFO:root:[{'answers': ['Comic-Con', 'Pop-Party', 'Game-Gathering'], 'question_str': "San Diego's massive annual convention celebrating modern pop culture is known as what?", 'question_number': 2, 'question_count': 12}]
+WARNING:lomond:disconnecting websocket
+INFO:root:[{'answers': ['Catcher', 'Pitcher', 'Shortstop'], 'question_str': 'Which baseball position stands several inches higher than the other players during the game?', 'question_number': 3, 'question_count': 12}]
+WARNING:lomond:disconnecting websocket
+INFO:root:[{'answers': ['Dwight Eisenhower', 'Harry Truman', 'Ronald Reagan'], 'question_str': 'Which US president had a middle name that was just a single letter?', 'question_number': 4, 'question_count': 12}]
+WARNING:lomond:disconnecting websocket
+INFO:root:[{'answers': ['Greenland', 'Mount Everest', 'Easter Island'], 'question_str': 'Rapa Nui is the indigenous name of what location?', 'question_number': 5, 'question_count': 12}]
+WARNING:lomond:disconnecting websocket
+INFO:root:[{'answers': ['Blade Runner', 'Top Gun', 'Gladiator'], 'question_str': 'Before hitting it big, the leading star of what film supported himself as a carpenter?', 'question_number': 6, 'question_count': 12}]
+WARNING:lomond:disconnecting websocket
+INFO:root:[{'answers': ['Butter', 'Jewel', 'Nut'], 'question_str': 'Sailors once gave avocados the nickname of "midshipman\'s" what?', 'question_number': 7, 'question_count': 12}]
+WARNING:lomond:disconnecting websocket
+INFO:root:[{'answers': ['Trisdecagon', 'Enneadecagon', 'Octadecagon'], 'question_str': 'Which of these polygons has the most sides?', 'question_number': 8, 'question_count': 12}]
+WARNING:lomond:disconnecting websocket
+INFO:root:[{'answers': ['Henry Ford', 'Ferruccio Lamborghini', 'Enzo Ferrari'], 'question_str': 'Which car company founder once held the world land speed record for wheel-driven vehicles?', 'question_number': 9, 'question_count': 12}]
+WARNING:lomond:disconnecting websocket
+INFO:root:[{'answers': ['Esquire', 'Vanity Fair', 'Time'], 'question_str': 'An original co-host of "20/20" was also the editor-in-chief of what magazine?', 'question_number': 10, 'question_count': 12}]
+WARNING:lomond:disconnecting websocket
+INFO:root:[{'answers': ['JRR Tolkien', 'William Blake', 'Ray Bradbury'], 'question_str': 'A character named Orc appears as a protagonist in the work of what author?', 'question_number': 11, 'question_count': 12}]
+WARNING:lomond:disconnecting websocket
+INFO:root:[{'answers': ['Sears', 'Victorinox', 'Kay Jewelers'], 'question_str': 'An 1800s scam involving watches led directly to the founding of which of these companies?', 'question_number': 12, 'question_count': 12}]
+INFO:root:[None]
+INFO:root:[None]
+INFO:root:[None]
+INFO:root:[None]
+INFO:root:[None]

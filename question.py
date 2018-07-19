@@ -41,6 +41,7 @@ async def analyze_question(question, choices):
 
 
 
+
  
 async def extract_info_multi_selection(word_types, q_words):
     subject = ""

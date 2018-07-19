@@ -69,7 +69,7 @@ async def bping(ctx):
         t1 = time.perf_counter()
         await client.send_typing(channel)
         t2 = time.perf_counter()
-        embed = discord.Embed(title="Ben10 Ping Delay", description='Ping: {}'.format(round((t2-t1)*1000)) + "ms", color=0xEE82EE)
+        embed = discord.Embed(title="Ben10 Ping Delay", description=':stopwatch: {}'.format(round((t2-t1)*1000)) + "ms", color=0xEE82EE)
         msg = await client.send_message(channel, embed=embed)
 
 
