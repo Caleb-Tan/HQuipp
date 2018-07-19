@@ -3,15 +3,13 @@ import logging
 import os
 import time
 from datetime import datetime
-
+import json
 import colorama
 
 import networking
 
 # Set up color-coding
 colorama.init()
-# Set up logging
-logging.basicConfig(filename="data.log", level=logging.INFO, filemode="w")
 
 # Read in bearer token and user ID
 with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "conn_settings.txt"), "r") as conn_settings:
@@ -21,7 +19,6 @@ with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "conn_setting
     try:
         BEARER_TOKEN_US = settings[0].split("=")[1]
     except IndexError as e:
-        logging.fatal(f"Settings read error: {settings}")
         raise e
 
 print("getting")
@@ -58,4 +55,6 @@ while True:
         print(f"Show active, connecting to socket at {socket}")
         data = asyncio.get_event_loop().run_until_complete(asyncio.gather(networking.websocket_handler(socket, headers)))
         print(data)
-        logging.info(data)
+        with open('data.json', 'w') as outfile:
+            json.dump(data)
+        

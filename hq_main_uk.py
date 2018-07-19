@@ -3,15 +3,13 @@ import logging
 import os
 import time
 from datetime import datetime
-
+import json
 import colorama
 
 import networking
 
 # Set up color-coding
 colorama.init()
-# Set up logging
-logging.basicConfig(filename="data.log", level=logging.INFO, filemode="w")
 
 # Read in bearer token and user ID
 with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "conn_settings.txt"), "r") as conn_settings:
@@ -21,7 +19,6 @@ with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "conn_setting
     try:
         BEARER_TOKEN_UK = settings[1].split("=")[1]
     except IndexError as e:
-        logging.fatal(f"Settings read error: {settings}")
         raise e
 
 print("getting")
@@ -35,7 +32,7 @@ headers = {"Authorization": f"Bearer {BEARER_TOKEN_UK}",
 while True:
     print()
     try:
-        response_data = asyncio.get_event_loop().run_until_complete(   networking.get_json_response(main_url, timeout=1.5, headers=headers))
+        response_data = asyncio.get_event_loop().run_until_complete(networking.get_json_response(main_url, timeout=1.5, headers=headers))
     except:
         print("Server response not JSON, retrying...")
         time.sleep(1)
@@ -52,10 +49,12 @@ while True:
             offset = datetime.fromtimestamp(now) - datetime.utcfromtimestamp(now)
             print(f"Next show time: {(next_time + offset).strftime('%Y-%m-%d %I:%M %p')}")
             print("Prize: " + response_data["nextShowPrize"])
-            time.sleep(5)
+            time.sleep(6)
     else:
         socket = response_data["broadcast"]["socketUrl"].replace("https", "wss")
         print(f"Show active, connecting to socket at {socket}")
         data = asyncio.get_event_loop().run_until_complete(asyncio.gather(networking.websocket_handler(socket, headers)))
         print(data)
-        logging.info(data)
+        with open('data.json', 'w') as outfile:
+            json.dump(data)
+        

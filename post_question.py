@@ -9,6 +9,7 @@ import asyncio
 import time
 import question as qs
 import sys
+import json 
 
 sys.dont_write_bytecode = True
 
@@ -98,21 +99,18 @@ async def post_embed(data):
 
 async def background_log_loop():
     await client.wait_until_ready()
-    file = open("data.log", "r")
+    prev = {}
     while not client.is_closed:
+        with open('data.json') as f:
+            data = json.load(f)
+            if data != prev:
+                prev = data
+                await post_embed(data)
+
         await asyncio.sleep(0.05)
-        where = file.tell()
-        line = file.readline()
-        if not line:
-            continue
-        else:
-            print(line)
-            if ("question_str" in line and line != "\n"):
-                await post_embed(ast.literal_eval(line.strip("INFO:root"))[0])
 
 
 
-# uk channel id = 457304971600199680
 @client.event
 async def on_ready():
     print('Logged in as')
