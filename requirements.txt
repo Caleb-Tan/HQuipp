@@ -8,3 +8,4 @@ colorama
 lomond
 requests
 discord
+lxml
