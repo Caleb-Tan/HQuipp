@@ -1,0 +1,31 @@
+WARNING:lomond:disconnecting websocket
+INFO:root:[{'answers': ['Richard Madeley', 'Art Garfunkel', 'R2-D2'], 'question_str': 'Who would you be most likely to see alongside C-3PO?', 'question_number': 1, 'question_count': 12}]
+WARNING:lomond:discoWARNING:aiohttp.client:Attempt to decode JSON with unexpected mimetype: text/html
+WARNING:aiohttp.client:Attempt to decode JSON with unexpected mimetype: text/html
+WARNING:aiohttp.client:Attempt to decode JSON with unexpected mimetype: text/html
+WARNING:aiohttp.client:Attempt to decode JSON with unexpected mimetype: text/html
+WARNING:aiohttp.client:Attempt to decode JSON with unexpected mimetype: text/html
+umber': 3, 'question_count': 12}]
+WARNING:lomond:disconnecting websocket
+INFO:root:[{'answers': ['Creaky door', 'Footsteps', 'Thunder'], 'question_str': 'Which of these sounds is heard first on the Michael Jackson track "Thriller"?', 'question_number': 4, 'question_count': 12}]
+WARNING:lomond:disconnecting websocket
+INFO:root:[{'answers': ['Gucci Mane', 'Post Malone', 'Chance the Rapper'], 'question_str': 'Which of these rappers does NOT have face tattoos?', 'question_number': 5, 'question_count': 12}]
+WARNING:lomond:disconnecting websocket
+INFO:root:[{'answers': ['The Prime Minister', 'The Chancellor', 'The Queen'], 'question_str': 'Which of these also has the title of First Lord of the Treasury?', 'question_number': 6, 'question_count': 12}]
+WARNING:lomond:disconnecting websocket
+INFO:root:[{'answers': ['Nottingham', 'Durham', 'Plymouth'], 'question_str': 'Which university has NEVER won a Guardian University Award?', 'question_number': 7, 'question_count': 12}]
+WARNING:lomond:disconnecting websocket
+INFO:root:[{'answers': ['Bob Dylan', 'Bruce Springsteen', 'Elton John'], 'question_str': 'Which singer has a fabled "MIB" team at his concerts who offer free upgraded seats to fans?', 'question_number': 8, 'question_count': 12}]
+WARNING:lomond:disconnecting websocket
+INFO:root:[{'answers': ['Venezuela', 'Uruguay', 'Ecuador'], 'question_str': 'Which of these countries has the shortest coastline?', 'question_number': 9, 'question_count': 12}]
+WARNING:lomond:disconnecting websocket
+INFO:root:[{'answers': ['Madame Tussauds', 'Natural History Museum', 'The Shard'], 'question_str': 'Which of these London attractions falls inside the Congestion Charge zone?', 'question_number': 10, 'question_count': 12}]
+WARNING:lomond:disconnecting websocket
+INFO:root:[{'answers': ['Switzerland', 'Austria', 'Denmark'], 'question_str': "Which of these countries has the highest priced McDonald's Big Mac?", 'question_number': 11, 'question_count': 12}]
+WARNING:lomond:disconnecting websocket
+INFO:root:[{'answers': ['Michael Fassbender', 'Christopher Lee', 'Peter Sellers'], 'question_str': 'Which of these actors had to get permission from the King of Sweden to get married?', 'question_number': 12, 'question_count': 12}]
+INFO:root:[None]
+INFO:root:[None]
+INFO:root:[None]
+WARNING:aiohttp.client:Attempt to decode JSON with unexpected mimetype: text/html
+WARNING:aiohttp.client:Attempt to decode JSON with unexpected mimetype: text/html
