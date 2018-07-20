@@ -98,6 +98,8 @@ async def post_embed(data):
         new_embed.set_image(url=url)
         await client.send_message(client.get_channel("468874613498314752"), embed=new_embed)
 
+#hq channel id = 468874613498314752
+
 async def background_log_loop():
     await client.wait_until_ready()
     prev = {}
