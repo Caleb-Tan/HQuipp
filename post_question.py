@@ -92,10 +92,11 @@ async def post_embed(data):
     new_embed.add_field(name="Question", value=str(data["question_number"]) + " out of " + str(data["question_count"]))
     await client.send_message(client.get_channel("468874613498314752"), embed=new_embed)
     
-    # data = await qs.analyze_question(data["question_str"], data["answers"])
-    # new_embed = discord.Embed(title="Location Question Detected", color=0x0000ff)
-    # new_embed.set_image(url=url)
-    # await client.send_message(client.get_channel("468874613498314752"), embed=new_embed)
+    data = await qs.analyze_question(data["question_str"], data["answers"])
+    if data != "":
+        new_embed = discord.Embed(title="Location Question Detected", color=0x0000ff)
+        new_embed.set_image(url=url)
+        await client.send_message(client.get_channel("468874613498314752"), embed=new_embed)
 
 async def background_log_loop():
     await client.wait_until_ready()
