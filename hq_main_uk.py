@@ -58,5 +58,5 @@ while True:
         data = asyncio.get_event_loop().run_until_complete(asyncio.gather(networking.websocket_handler(socket, headers)))
         print(data)
         with open('data.json', 'w') as outfile:
-            json.dumps(data)
+            json.dump(data[0], outfile)
         

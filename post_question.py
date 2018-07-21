@@ -18,6 +18,7 @@ BOT_PREFIX = (".")
 
 client = discord.Client()
 client = Bot(command_prefix=BOT_PREFIX)
+CHANNEL = "468874613498314752"
 
 choices = ["placeholder", "placeholder", "placeholder"]
 data = {}
@@ -25,7 +26,8 @@ data = {}
 def generate_embed(choice, command, choiceNo):
     result = search.question(command.replace("/", choice))
     new_embed = discord.Embed(title=choice, description=result["result"], color=0x00f900)
-    new_embed.set_footer(text="Search Time: " + str(result["time"]))
+    time_taken = str(result["time"])
+    new_embed.set_footer(text=f"Search Time: {time_taken}")
     data["embed" + str (choiceNo)] = new_embed
 
 
@@ -50,8 +52,24 @@ async def q(ctx):
     else:
         result = search.question(command)
         new_embed = discord.Embed(title=command, description=result["result"], color=0x00f900)
-        new_embed.set_footer(text="Search Time: " + str(result["time"]))
+        time_taken = str(result["time"])
+        new_embed.set_footer(text=f"Search Time: {time_taken}")
         await client.send_message(ctx.message.channel, embed=new_embed)
+
+@client.command(pass_context=True)
+async def switch(ctx):
+    command = ctx.message.content.replace(".switch", "")
+    print(command)
+    global CHANNEL
+    if "test" in command and ctx.message.author.id == "281585344300711937":
+        CHANNEL = "457281602435940362"
+        await client.send_message(ctx.message.channel, embed=discord.Embed(title="Now posting in:", description=client.get_channel(CHANNEL).mention, color=0xff2600))
+    elif "live" in command and ctx.message.author.id == "281585344300711937":
+        CHANNEL = "468874613498314752"
+        await client.send_message(ctx.message.channel, embed=discord.Embed(title="Now posting in:", description=client.get_channel(CHANNEL).mention, color=0xff2600))
+    else:
+        await client.send_message(ctx.message.channel, embed=discord.Embed(title="Improper credentials or wrong channel specified.", color=0xff2600))
+    
 
 @client.command(pass_context=True)
 async def math(ctx):
@@ -79,24 +97,34 @@ async def bping(ctx):
 async def post_embed(data):
     print(data)
     query = data["question_str"].replace(" ", "+")
-    url = "https://www.google.com/search?q=" + query
+    url = "https://www.google.com/search?q="
+    q_data = await qs.analyze_question(data["question_str"], data["answers"])
     choices[0] = data["answers"][0]
     choices[1] = data["answers"][1]
     choices[2] = data["answers"][2]
     description = ""
     for i in range(1,4):
         ans = data["answers"][i-1]
-        ans_url = url + "+AND+" + ans.replace(" ", "+")
+        ans_url = url + query + "+AND+" + ans.replace(" ", "+") if q_data == "x" else url + q_data["condition"].replace("<answer>", ans).replace(" ", "+")
         description += str(i) + ". " + "[" + ans + "]" + "(" + ans_url + ")" + "\n" 
-    new_embed = discord.Embed(title=data["question_str"], url=url, description=description, color=0xff2600)
-    new_embed.add_field(name="Question", value=str(data["question_number"]) + " out of " + str(data["question_count"]))
-    await client.send_message(client.get_channel("468874613498314752"), embed=new_embed)
-    
-    data = await qs.analyze_question(data["question_str"], data["answers"])
-    if data != "":
-        new_embed = discord.Embed(title="Location Question Detected", color=0x0000ff)
-        new_embed.set_image(url=url)
-        await client.send_message(client.get_channel("468874613498314752"), embed=new_embed)
+    question_embed = discord.Embed(title=data["question_str"], url=url+query, description=description, color=0xff2600)
+    question_embed.add_field(name="Question", value=str(data["question_number"]) + " out of " + str(data["question_count"]))    
+    await client.send_message(client.get_channel(CHANNEL), embed=question_embed)
+
+    if q_data != "x":
+        analysis_embed = discord.Embed(title=q_data["type"] + " Question Detected", color=0x0000ff)
+
+        if q_data["type"] == "Character Identification":
+            analysis_embed.add_field(name="Character Type", value=q_data["character_type"], inline=True)
+        else:
+            analysis_embed.add_field(name="Subject", value=q_data["subject"], inline=True)
+
+        print(q_data["condition"])
+        analysis_embed.add_field(name="Condition", value=q_data["condition"].replace("<answer> ", ""), inline=True)
+        analysis_embed.set_footer(text="Analysis Time: {}".format(q_data["search_time"]))
+        if "img_url" in q_data.keys():
+            analysis_embed.set_image(url=q_data["img_url"])
+        await client.send_message(client.get_channel(CHANNEL), embed=analysis_embed)
 
 #hq channel id = 468874613498314752
 
