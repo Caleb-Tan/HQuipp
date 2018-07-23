@@ -58,16 +58,16 @@ async def q(ctx):
 
 @client.command(pass_context=True)
 async def switch(ctx):
-    command = ctx.message.content.replace(".switch", "")
+    command = ctx.message.content.replace(".switch ", "")
     print(command)
     global CHANNEL
-    if "test" in command and ctx.message.author.id == "281585344300711937":
+    if "test" == command and ctx.message.author.id == "281585344300711937":
         CHANNEL = "457281602435940362"
         await client.send_message(ctx.message.channel, embed=discord.Embed(title="Now posting in:", description=client.get_channel(CHANNEL).mention, color=0xff2600))
-    elif "live" in command and ctx.message.author.id == "281585344300711937":
+    elif "live" == command and ctx.message.author.id == "281585344300711937":
         CHANNEL = "468874613498314752"
         await client.send_message(ctx.message.channel, embed=discord.Embed(title="Now posting in:", description=client.get_channel(CHANNEL).mention, color=0xff2600))
-    elif "live2" in command and ctx.message.author.id == "281585344300711937":
+    elif "live2" == command and ctx.message.author.id == "281585344300711937":
         CHANNEL = "470801854620631040"
         await client.send_message(ctx.message.channel, embed=discord.Embed(title="Now posting in:", description=client.get_channel(CHANNEL).mention, color=0xff2600))
     else:
