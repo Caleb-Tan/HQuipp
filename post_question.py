@@ -67,6 +67,9 @@ async def switch(ctx):
     elif "live" in command and ctx.message.author.id == "281585344300711937":
         CHANNEL = "468874613498314752"
         await client.send_message(ctx.message.channel, embed=discord.Embed(title="Now posting in:", description=client.get_channel(CHANNEL).mention, color=0xff2600))
+    elif "live2" in command and ctx.message.author.id == "281585344300711937":
+        CHANNEL = "470801854620631040"
+        await client.send_message(ctx.message.channel, embed=discord.Embed(title="Now posting in:", description=client.get_channel(CHANNEL).mention, color=0xff2600))
     else:
         await client.send_message(ctx.message.channel, embed=discord.Embed(title="Improper credentials or wrong channel specified.", color=0xff2600))
     
