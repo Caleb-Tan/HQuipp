@@ -64,10 +64,10 @@ async def switch(ctx):
     if "test" == command and ctx.message.author.id == "281585344300711937":
         CHANNEL = "457281602435940362"
         await client.send_message(ctx.message.channel, embed=discord.Embed(title="Now posting in:", description=client.get_channel(CHANNEL).mention, color=0xff2600))
-    elif "live" == command and ctx.message.author.id == "281585344300711937":
+    elif "live2" == command and ctx.message.author.id == "281585344300711937":
         CHANNEL = "468874613498314752"
         await client.send_message(ctx.message.channel, embed=discord.Embed(title="Now posting in:", description=client.get_channel(CHANNEL).mention, color=0xff2600))
-    elif "live2" == command and ctx.message.author.id == "281585344300711937":
+    elif "live" == command and ctx.message.author.id == "281585344300711937":
         CHANNEL = "470801854620631040"
         await client.send_message(ctx.message.channel, embed=discord.Embed(title="Now posting in:", description=client.get_channel(CHANNEL).mention, color=0xff2600))
     else:
@@ -137,7 +137,7 @@ async def background_log_loop():
     while not client.is_closed:
         with open('data.json') as f:
             data = json.load(f)
-            if data != prev:
+            if data != prev and data != None:
                 prev = data
                 await post_embed(data)
 
