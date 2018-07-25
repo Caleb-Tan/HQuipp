@@ -68,7 +68,7 @@ async def switch(ctx):
     elif "hq" == command and ctx.message.author.id in authorized_users:
         CHANNEL = "470801854620631040"
         await client.send_message(ctx.message.channel, embed=discord.Embed(title="Now posting in:", description=client.get_channel(CHANNEL).mention, color=0xff2600))
-    elif "hqsports" == command and ctx.message.author.id in authorized_users:
+    elif "hq-2" == command and ctx.message.author.id in authorized_users:
         CHANNEL = "468874613498314752"
         await client.send_message(ctx.message.channel, embed=discord.Embed(title="Now posting in:", description=client.get_channel(CHANNEL).mention, color=0xff2600))
     else:
