@@ -59,16 +59,17 @@ async def q(ctx):
 @client.command(pass_context=True)
 async def switch(ctx):
     command = ctx.message.content.replace(".switch ", "")
+    authorized_users = ["199287675734327296", "281585344300711937", "244211320302469120"]
     print(command)
     global CHANNEL
-    if "test" == command and ctx.message.author.id == "281585344300711937":
+    if "bot-control" == command and ctx.message.author.id in authorized_users:
         CHANNEL = "457281602435940362"
         await client.send_message(ctx.message.channel, embed=discord.Embed(title="Now posting in:", description=client.get_channel(CHANNEL).mention, color=0xff2600))
-    elif "live2" == command and ctx.message.author.id == "281585344300711937":
-        CHANNEL = "468874613498314752"
-        await client.send_message(ctx.message.channel, embed=discord.Embed(title="Now posting in:", description=client.get_channel(CHANNEL).mention, color=0xff2600))
-    elif "live" == command and ctx.message.author.id == "281585344300711937":
+    elif "hq" == command and ctx.message.author.id in authorized_users:
         CHANNEL = "470801854620631040"
+        await client.send_message(ctx.message.channel, embed=discord.Embed(title="Now posting in:", description=client.get_channel(CHANNEL).mention, color=0xff2600))
+    elif "hqsports" == command and ctx.message.author.id in authorized_users:
+        CHANNEL = "468874613498314752"
         await client.send_message(ctx.message.channel, embed=discord.Embed(title="Now posting in:", description=client.get_channel(CHANNEL).mention, color=0xff2600))
     else:
         await client.send_message(ctx.message.channel, embed=discord.Embed(title="Improper credentials or wrong channel specified.", color=0xff2600))
