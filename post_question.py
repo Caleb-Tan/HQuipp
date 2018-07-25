@@ -20,7 +20,7 @@ client = discord.Client()
 client = Bot(command_prefix=BOT_PREFIX)
 CHANNEL = "468874613498314752"
 
-choices = ["placeholder", "placeholder", "placeholder"]
+choices = ["", "", ""]
 data = {}
 
 def generate_embed(choice, command, choiceNo):
@@ -124,7 +124,7 @@ async def post_embed(data):
             analysis_embed.add_field(name="Subject", value=q_data["subject"], inline=True)
 
         print(q_data["condition"])
-        analysis_embed.add_field(name="Condition", value=q_data["condition"].replace("<answer> ", ""), inline=True)
+        analysis_embed.add_field(name="Condition", value=q_data["condition"].replace("<answer>", ""), inline=True)
         analysis_embed.set_footer(text="Analysis Time: {}".format(q_data["search_time"]))
         if "img_url" in q_data.keys():
             analysis_embed.set_image(url=q_data["img_url"])
