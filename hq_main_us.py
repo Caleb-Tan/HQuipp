@@ -57,7 +57,10 @@ while True:
         socket = response_data["broadcast"]["socketUrl"].replace("https", "wss")
         print(f"Show active, connecting to socket at {socket}")
         data = asyncio.get_event_loop().run_until_complete(asyncio.gather(networking.websocket_handler(socket, headers)))
-        print(type(data))
+        if data == None:
+            continue
+        data["show"] = "US"
+        print(data)
         with open('data.json', 'w') as outfile:
             json.dump(data[0], outfile)
         

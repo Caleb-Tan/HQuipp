@@ -70,15 +70,17 @@ async def extract_info_person(word_types, q_words):
 async def extract_info_multi_selection(word_types, q_words):
     subject = ""
     condition = ""
+    print(word_types)
     if q_words.index("which") > 1: # run if part of the condition is in front of the which statement
         lead_in = q_words[:q_words.index("which")]
         for i in range(0, q_words.index("which")):
             curr_word = word_types[i][0]
-            if "of" in lead_in and "according" not in lead_in:
+            if "of" in lead_in and "according" not in lead_in and "at" not in lead_in:
                 if "IN" not in word_types[i][1] and "DT" not in word_types[i][1]:
                     subject += curr_word + " "
             else:
                 condition += curr_word + " "
+    print(condition)
     condition += "<answer>" + " "
     curr_index = q_words.index("which") + 1
     curr_type = word_types[curr_index][1]
