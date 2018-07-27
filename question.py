@@ -23,15 +23,17 @@ async def analyze_question(question, choices):
         q_data = await extract_info_person(word_types, q_words)
         ret_data = {"type": "Character Identification", "character_type": q_data["character_type"], "condition": q_data["condition"]}
         ret_data["search_time"] = round(time.time() - start_time, 3)
+        print(ret_data)
         return ret_data
     elif "which" in undercase_question: # multiple selection question
-        q_data = await extract_info_multi_selection(word_types, q_words) # get question data (subject and condition)
+        q_data = await extract_info_multi_selection(word_types, q_words, undercase_question) # get question data (subject and condition)
         ret_data = {"type": "Multiple Selection", "subject": q_data["subject"], "condition": q_data["condition"]}
         if any(keyword in undercase_question for keyword in location_keywords) and any(keyword in undercase_question for keyword in location_keywords2): # if a map is needed  
             ret_data["type"] = "Location Identification"
             ret_data["img_url"] = await generate_map(q_data, choices)
 
         ret_data["search_time"] = round(time.time() - start_time, 3)
+        print(ret_data)
         return ret_data
     return "x"
 
@@ -63,11 +65,10 @@ async def extract_info_person(word_types, q_words):
             if word != "whose" or word != "what":
                 condition += word.strip("?") + " "
     character_type = "- Implied Character -" if not character_type else character_type
-    print(condition.rstrip())
     return {"character_type": character_type.rstrip(), "condition": condition.rstrip()}    
     
 
-async def extract_info_multi_selection(word_types, q_words):
+async def extract_info_multi_selection(word_types, q_words, undercase_question):
     subject = ""
     condition = ""
     print(word_types)
@@ -75,12 +76,13 @@ async def extract_info_multi_selection(word_types, q_words):
         lead_in = q_words[:q_words.index("which")]
         for i in range(0, q_words.index("which")):
             curr_word = word_types[i][0]
-            if "of" in lead_in and "according" not in lead_in and "at" not in lead_in:
-                if "IN" not in word_types[i][1] and "DT" not in word_types[i][1]:
+            curr_word_text = undercase_question.split("which")[0]
+            print("is also" not in undercase_question.split("which")[0])
+            if any(keyword in curr_word_text for keyword in ["out of", "of these"]):
+                if "IN" not in word_types[i][1] and "DT" not in word_types[i][1] and "CD" not in word_types[i][1]:
                     subject += curr_word + " "
             else:
                 condition += curr_word + " "
-    print(condition)
     condition += "<answer>" + " "
     curr_index = q_words.index("which") + 1
     curr_type = word_types[curr_index][1]

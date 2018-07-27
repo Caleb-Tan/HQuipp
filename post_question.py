@@ -102,18 +102,19 @@ async def post_embed(data):
     print(data)
     query = data["question_str"].replace(" ", "+")
     url = "https://www.google.com/search?q="
-    q_data = await qs.analyze_question(data["question_str"], data["answers"])
     choices[0] = data["answers"][0]
     choices[1] = data["answers"][1]
     choices[2] = data["answers"][2]
     description = ""
+    options = """("{0}"+OR+"{1}"+OR+"{2}")""".format(choices[0].replace(" ", "+"), choices[1].replace(" ", "+"), choices[2].replace(" ", "+"))
     for i in range(1,4):
         ans = data["answers"][i-1]
-        ans_url = url + query + "+AND+" + ans.replace(" ", "+") if q_data == "x" else url + q_data["condition"].replace("<answer>", ans).replace(" ", "+")
-        description += str(i) + ". " + "[" + ans + "]" + "(" + ans_url + ")" + "\n" 
-    question_embed = discord.Embed(title=data["question_str"], url=url+query, description=description, color=0xff2600)
+        description += f"{str(i)}. {ans}\n" 
+    question_embed = discord.Embed(title=data["question_str"], url=f"{url}{query}+{options}", description=description, color=0xff2600)
     question_embed.add_field(name="Question", value=str(data["question_number"]) + " out of " + str(data["question_count"]))    
     await client.send_message(client.get_channel(CHANNEL), embed=question_embed)
+
+    q_data = await qs.analyze_question(data["question_str"], data["answers"])
 
     if q_data != "x":
         analysis_embed = discord.Embed(title=q_data["type"] + " Question Detected", color=0x0000ff)
