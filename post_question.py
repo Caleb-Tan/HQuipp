@@ -117,19 +117,23 @@ async def post_embed(data):
     q_data = await qs.analyze_question(data["question_str"], data["answers"])
 
     if q_data != "x":
-        analysis_embed = discord.Embed(title=q_data["type"] + " Question Detected", color=0x0000ff)
+        try:
+            analysis_embed = discord.Embed(title=q_data["type"] + " Question Detected", color=0x0000ff)
 
-        if q_data["type"] == "Character Identification":
-            analysis_embed.add_field(name="Character Type", value=q_data["character_type"], inline=True)
-        else:
-            analysis_embed.add_field(name="Subject", value=q_data["subject"], inline=True)
+            if q_data["type"] == "Character Identification":
+                analysis_embed.add_field(name="Character Type", value=q_data["character_type"], inline=True)
+            else:
+                analysis_embed.add_field(name="Subject", value=q_data["subject"], inline=True)
 
-        print(q_data["condition"])
-        analysis_embed.add_field(name="Condition", value=q_data["condition"].replace("<answer>", ""), inline=True)
-        analysis_embed.set_footer(text="Analysis Time: {}".format(q_data["search_time"]))
-        if "img_url" in q_data.keys():
-            analysis_embed.set_image(url=q_data["img_url"])
-        await client.send_message(client.get_channel(CHANNEL), embed=analysis_embed)
+            print(q_data["condition"])
+            analysis_embed.add_field(name="Condition", value=q_data["condition"].replace("<answer>", ""), inline=True)
+            analysis_embed.set_footer(text="Analysis Time: {}".format(q_data["search_time"]))
+            if "img_url" in q_data.keys():
+                analysis_embed.set_image(url=q_data["img_url"])
+            await client.send_message(client.get_channel(CHANNEL), embed=analysis_embed)
+        except Exception as exception:
+            print(exception)
+
 
 #hq channel id = 468874613498314752
 

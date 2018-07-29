@@ -31,7 +31,6 @@ async def analyze_question(question, choices):
         if any(keyword in undercase_question for keyword in location_keywords) and any(keyword in undercase_question for keyword in location_keywords2): # if a map is needed  
             ret_data["type"] = "Location Identification"
             ret_data["img_url"] = await generate_map(q_data, choices)
-
         ret_data["search_time"] = round(time.time() - start_time, 3)
         print(ret_data)
         return ret_data
@@ -77,7 +76,6 @@ async def extract_info_multi_selection(word_types, q_words, undercase_question):
         for i in range(0, q_words.index("which")):
             curr_word = word_types[i][0]
             curr_word_text = undercase_question.split("which")[0]
-            print("is also" not in undercase_question.split("which")[0])
             if any(keyword in curr_word_text for keyword in ["out of", "of these"]):
                 if "IN" not in word_types[i][1] and "DT" not in word_types[i][1] and "CD" not in word_types[i][1]:
                     subject += curr_word + " "
