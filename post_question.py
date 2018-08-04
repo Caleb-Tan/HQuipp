@@ -47,6 +47,7 @@ async def q(ctx):
         t1.join()
         t2.join
         t3.join()
+        print(data)
         for i in range(1,4):
             await client.send_message(ctx.message.channel, embed=data["embed" + str(i)])
     else:
@@ -111,7 +112,8 @@ async def post_embed(data):
         ans = data["answers"][i-1]
         description += f"{str(i)}. {ans}\n" 
     question_embed = discord.Embed(title=data["question_str"], url=f"{url}{query}+{options}", description=description, color=0xff2600)
-    question_embed.add_field(name="Question", value=str(data["question_number"]) + " out of " + str(data["question_count"]))    
+    question_embed.add_field(name="Question", value=str(data["question_number"]) + " out of " + str(data["question_count"]))  
+    question_embed.set_author(icon_url="https://image.ibb.co/kYVcVe/hq.jpg", name="HQ Trivia")
     await client.send_message(client.get_channel(CHANNEL), embed=question_embed)
 
     q_data = await qs.analyze_question(data["question_str"], data["answers"])

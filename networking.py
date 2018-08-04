@@ -42,6 +42,10 @@ async def get_json_response(url, timeout, headers):
         async with session.get(url, timeout=timeout) as response:
             return await response.json()
 
+async def get_json_response_post(url, timeout, headers):
+    async with aiohttp.ClientSession(headers=headers) as session:
+        async with session.post(url, timeout=timeout) as response:
+            return await response.json()  
 
 async def websocket_handler(uri, headers):
     websocket = WebSocket(uri)

@@ -18,6 +18,7 @@ async def analyze_question(question, choices):
     for ch in ['"', "'s", "following", "“", "”", ","]:
         question = question.replace(ch, "")
     word_types = pos_tag(word_tokenize(question))
+    print(word_types)
     # deciding by question type
     if any(q_keyword in undercase_question for q_keyword in ["who", "whose"]) and not any(q_keyword in undercase_question for q_keyword in ["which", "what"]): # person question
         q_data = await extract_info_person(word_types, q_words)

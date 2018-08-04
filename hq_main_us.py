@@ -7,6 +7,7 @@ import json
 import colorama
 import networking
 import sys
+import requests
 
 sys.dont_write_bytecode = True
 
@@ -24,7 +25,7 @@ with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "conn_setting
     except IndexError as e:
         raise e
 
-print("getting")
+print("Getting...")
 main_url = f"https://api-quiz.hype.space/shows/now?type="
 headers = {"Authorization": f"Bearer {BEARER_TOKEN_US}",
            "x-hq-client": "Android/1.3.0"}
@@ -41,7 +42,6 @@ while True:
         time.sleep(1)
         continue
     
-
     if "broadcast" not in response_data or response_data["broadcast"] is None:
         if "error" in response_data and response_data["error"] == "Auth not valid":
             raise RuntimeError("Connection settings invalid")
