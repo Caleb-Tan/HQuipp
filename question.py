@@ -7,7 +7,7 @@ sys.dont_write_bytecode = True
 
 # special keywords
 location_keywords = ["farthest", "closest", "furthest", "nearest", "located", "is in ", "is NOT in ", "found "]
-location_keywords2 = ["city", "cities", "country", "countries", "territory", "territories", "building", "place", "state", "island", "mountain", "location", "area", "site", "region", "nation", "province", "district", "zone", "sector", "north", "south", "east", "west"]
+location_keywords2 = ["city", "cities", "country", "countries", "territory", "territories", "building", "place", "state", "island", "mountain", "location", "area", "site", "region", "nation", "province", "district", "zone", "sector", "north", "south", "east", "west", "park"]
 time_keywords = ["earliest", "most recently", "oldest", "youngest"]
 base_map_url = "https://maps.googleapis.com/maps/api/staticmap?zoom=2&scale=2&size=700x500&maptype=roadmap&format=png&visual_refresh=true"
 
