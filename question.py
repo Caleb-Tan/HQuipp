@@ -37,7 +37,6 @@ async def analyze_question(question, choices):
         return ret_data
     return "x"
 
-
 async def extract_info_person(word_types, q_words):
     character_type = ""
     condition = ""
@@ -117,7 +116,7 @@ async def generate_map(q_data, choices):
             if tag[1] in ["JJ", "NNP"]:
                 parameter += "+" + tag[0]
     global base_map_url
-    for i in range(0,3):
+    for i in range(0,len(choices)):
         choice = choices[i].replace(" ", "+")
         marker_link = "&markers=size:mid%7Ccolor:0xff0a00%7C" + "label:" + str(i+1) + "%7C" + choice + parameter
         new_base_map_url += base_map_url + marker_link if i == 0 else marker_link

@@ -59,7 +59,7 @@ async def q(ctx):
 
 @client.command(pass_context=True)
 async def switch(ctx):
-    command = ctx.message.content.replace(".switch ", "")
+    command = ctx.message.content.strip(".switch ")
     authorized_users = ["199287675734327296", "281585344300711937", "244211320302469120"]
     print(command)
     global CHANNEL
@@ -75,6 +75,19 @@ async def switch(ctx):
     else:
         await client.send_message(ctx.message.channel, embed=discord.Embed(title="Improper credentials or wrong channel specified.", color=0xff2600))
     
+@client.command(pass_context=True)
+async def map(ctx):
+    places = ctx.message.content.replace(".map", "").lstrip().rstrip().split(",")
+    print(places)
+    map_url = await qs.generate_map({"subject":"-"}, places)
+    description = ""
+    for i in range(0, len(places)):
+        place = places[i]
+        description += f"{i+1}. {place}\n"
+    map_embed = discord.Embed(title="Map", description=description, color=0x0000ff)
+    map_embed.set_image(url=map_url)
+    await client.send_message(ctx.message.channel, embed=map_embed)
+
 
 @client.command(pass_context=True)
 async def math(ctx):
