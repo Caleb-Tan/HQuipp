@@ -59,7 +59,7 @@ async def q(ctx):
 
 @client.command(pass_context=True)
 async def switch(ctx):
-    command = ctx.message.content.strip(".switch ")
+    command = ctx.message.content.replace(".switch ", "")
     authorized_users = ["199287675734327296", "281585344300711937", "244211320302469120"]
     print(command)
     global CHANNEL
