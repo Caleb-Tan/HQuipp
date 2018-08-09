@@ -60,7 +60,7 @@ async def q(ctx):
 @client.command(pass_context=True)
 async def switch(ctx):
     command = ctx.message.content.replace(".switch ", "")
-    authorized_users = ["199287675734327296", "281585344300711937", "244211320302469120"]
+    authorized_users = ["199287675734327296", "281585344300711937", "244211320302469120", "158786149438062593"]
     print(command)
     global CHANNEL
     if "bot-control" == command and ctx.message.author.id in authorized_users:
@@ -163,7 +163,6 @@ async def background_log_loop():
                 await post_embed(data)
 
         await asyncio.sleep(0.05)
-
 
 
 @client.event
