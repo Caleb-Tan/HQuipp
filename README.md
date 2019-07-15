@@ -19,8 +19,8 @@ cchardet
 ```
 ### Installation
 ```
-git clone https://github.com/Exaphis/HackQ-Trivia.git
-cd HackQ-Trivia
+git clone https://github.com/Caleb-Tan/HQuipp.git
+cd HQuipp
 pip install -r requirements.txt
 ```
 
